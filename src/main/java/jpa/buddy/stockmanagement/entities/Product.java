@@ -1,6 +1,9 @@
 package jpa.buddy.stockmanagement.entities;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +19,18 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_type_id", nullable = false)
     private ProductType productType;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "vendor_id", nullable = false)
+    private Vendor vendor;
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
 
     public ProductType getProductType() {
         return productType;
@@ -39,5 +54,18 @@ public class Product {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Product product = (Product) o;
+        return id != null && Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

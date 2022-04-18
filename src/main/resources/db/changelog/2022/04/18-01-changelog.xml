@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1650297616196-1" author="vlasov (generated)">
+        <createTable tableName="product">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_type_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1650297616196-2" author="vlasov (generated)">
+        <createTable tableName="product_type">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product_type"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1650297616196-3" author="vlasov (generated)">
+        <addForeignKeyConstraint baseColumnNames="product_type_id" baseTableName="product"
+                                 constraintName="FK_PRODUCT_ON_PRODUCT_TYPE" referencedColumnNames="id"
+                                 referencedTableName="product_type"/>
+    </changeSet>
+    <changeSet id="1650297616196-4" author="vlasov (generated)">
+        <dropForeignKeyConstraint baseTableName="projects" constraintName="fk_projects_on_manager"/>
+    </changeSet>
+    <changeSet id="1650297616196-5" author="vlasov (generated)">
+        <dropForeignKeyConstraint baseTableName="tasks" constraintName="fk_tasks_on_assignee"/>
+    </changeSet>
+    <changeSet id="1650297616196-6" author="vlasov (generated)">
+        <dropForeignKeyConstraint baseTableName="tasks" constraintName="fk_tasks_on_project"/>
+    </changeSet>
+    <changeSet id="1650297616196-8" author="vlasov (generated)">
+        <dropTable cascadeConstraints="true" tableName="projects"/>
+    </changeSet>
+    <changeSet id="1650297616196-9" author="vlasov (generated)">
+        <dropTable cascadeConstraints="true" tableName="tasks"/>
+    </changeSet>
+    <changeSet id="1650297616196-10" author="vlasov (generated)">
+        <dropTable cascadeConstraints="true" tableName="users"/>
+    </changeSet>
+
+</databaseChangeLog>
