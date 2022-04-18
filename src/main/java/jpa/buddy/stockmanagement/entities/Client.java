@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
     @SequenceGenerator(name = "client_seq")
